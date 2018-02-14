@@ -1,0 +1,2 @@
+language: csharp-kestrel
+fprocess: dotnet ./root.dll
