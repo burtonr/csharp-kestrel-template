@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.0-sdk as builder
+FROM microsoft/aspnetcore-build:2.0 as builder
 
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
@@ -16,7 +16,7 @@ COPY .  .
 
 RUN dotnet publish -c release -o published
 
-FROM microsoft/dotnet:2.0-runtime
+FROM microsoft/aspnetcore:2.0
 
 RUN apt-get update -qy \
     && apt-get install -qy curl ca-certificates --no-install-recommends \ 
@@ -33,8 +33,7 @@ COPY --from=builder /root/src/published .
 ENV fprocess="dotnet ./root.dll"
 ENV cgi_headers="true"
 ENV mode="http"
-ENV upstream_url="http://127.0.0.1:5000"
+ENV upstream_url="http://127.0.0.1"
 
 EXPOSE 8080
 CMD ["fwatchdog"]
-
