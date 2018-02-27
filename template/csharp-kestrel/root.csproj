@@ -8,4 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
   </ItemGroup>
+  <PropertyGroup> 
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+  </PropertyGroup>
 </Project>
