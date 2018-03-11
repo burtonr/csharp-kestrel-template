@@ -21,7 +21,7 @@ FROM microsoft/aspnetcore:2.0
 RUN apt-get update -qy \
     && apt-get install -qy curl ca-certificates --no-install-recommends \ 
     && echo "Pulling watchdog binary from Github." \
-    && curl -sSLf https://github.com/openfaas-incubator/of-watchdog/releases/download/0.2.1/of-watchdog > /usr/bin/fwatchdog \
+    && curl -sSLf https://github.com/openfaas-incubator/of-watchdog/releases/download/0.2.3/of-watchdog > /usr/bin/fwatchdog \
     && chmod +x /usr/bin/fwatchdog \
     && apt-get -qy remove curl \
     && apt-get clean \
