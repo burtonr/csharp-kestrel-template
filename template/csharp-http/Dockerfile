@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS builder
 
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
@@ -16,7 +16,7 @@ COPY .  .
 
 RUN dotnet publish -c release -o published
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 
 RUN apt-get update -qy \
     && apt-get install -qy curl ca-certificates --no-install-recommends \ 
