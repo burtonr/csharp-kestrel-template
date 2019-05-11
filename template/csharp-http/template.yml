@@ -1,0 +1,5 @@
+language: csharp-kestrel
+fprocess: dotnet ./root.dll
+welcome_message: |
+  You have created a new function which uses .NET Core 2.1.
+  dotnet add package can be used to add extra libraries
