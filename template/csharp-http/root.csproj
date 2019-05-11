@@ -6,6 +6,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FaasUtils" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="OpenFaas.FunctionSDK" Version="0.0.2" />
   </ItemGroup>

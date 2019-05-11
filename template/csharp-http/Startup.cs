@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FaasUtils.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ namespace root
     {
         public void ConfigureServices(IServiceCollection services)
         {
+	        services.AddFaasUtils();
 	        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 	        services.AddScoped<FunctionContext>(FunctionContextFactory.Create);
         }

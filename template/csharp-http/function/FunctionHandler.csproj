@@ -7,5 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="OpenFaas.FunctionSDK" Version="0.0.2" />
+    <PackageReference Include="FaasUtils" Version="1.0.0" />
   </ItemGroup>
 </Project>

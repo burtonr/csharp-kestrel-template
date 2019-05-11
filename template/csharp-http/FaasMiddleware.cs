@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using FaasUtils;
 using Function;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using OpenFaaS.FunctionSDK;
@@ -12,17 +14,21 @@ namespace root
 {
 	public class FaasMiddleware
 	{
-		public FaasMiddleware(RequestDelegate next)
+		private readonly Func<FunctionHandler, IServiceProvider, Task<object>> _function;
+		private readonly FunctionHandler _instance;
+
+		public FaasMiddleware(RequestDelegate next, IServiceProvider services, IFunctionExpressionTreeBuilder funcBuilder)
 		{
+			_instance = ActivatorUtilities.CreateInstance<FunctionHandler>(services);
+			_function = funcBuilder.CreateLambda<FunctionHandler>();
 		}
 
-		public async Task InvokeAsync(HttpContext context, FunctionContext fnContext)
+		public async Task InvokeAsync(HttpContext context, FunctionContext fnContext, IServiceProvider services)
 		{
-			var functionHandler = new FunctionHandler();
 			try
 			{
 				// execute the function
-				var result = await functionHandler.Handle(fnContext);
+				var result = (FunctionResponse) await _function(_instance, services);
 
 				// set the response from the FunctionResponse
 				context.Response.ContentType = "application/json";

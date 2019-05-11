@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Specialized;
 using System.Threading.Tasks;
 using OpenFaaS.FunctionSDK;
 
@@ -30,24 +27,22 @@ namespace Function
 
     public class FunctionHandler
     {
-        public Task<FunctionResponse> Handle(FunctionContext fnContext)
+		// Sample: use a custom request type by taking an object as an argument
+		//public Task<FunctionResponse> InvokeAsync(SampleRequest input)
+		public Task<FunctionResponse> InvokeAsync(string input)
         {
             // Sample: Set custom headers
             var resultHeaders = new NameValueCollection
             {
                 {"X-OpenFaaS-Function", "csharp-kestrel"},
             };
-
-            // Sample: use a custom request type by casting the fnContext.Body to JObject and deserializing it
-            // var jBody = (JObject)fnContext.Body;
-            // SampleRequest req = jBody.ToObject<SampleRequest>();
             
             var result = new FunctionResponse {
                 // Sample: Return plain text, or a custom object as the body
                 // Body = $"Hello from OpenFaaS + Kestrel, {fnContext.Body}!",
                 Body = new SampleResponse
                 {
-                    Response = $"Hello from OpenFaaS + Kestrel, {fnContext.Body}"
+                    Response = $"Hello from OpenFaaS + Kestrel, {input}"
                 },
                 Headers = resultHeaders
             };
