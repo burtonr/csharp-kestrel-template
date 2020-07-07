@@ -1,4 +1,6 @@
-#OpenFaaS C# HTTP Template
+# OpenFaaS C# HTTP Template
+
+> This is no longer being maintained as the OpenFaaS community has decided to prefer [csharp-httprequest-template](https://github.com/distantcam/csharp-httprequest-template) over this implementation
 
 This repository contains the template for OpenFaaS using the upgraded `of-watchdog` which allows for higher throughput.
 
